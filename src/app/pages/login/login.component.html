@@ -1,0 +1,17 @@
+<form (ngSubmit)="onLiginIn()">
+  <input 
+    type="text" 
+    placeholder="Email"
+    [(ngModel)]="email"
+    name="email"
+    >
+  <input 
+    type="text"
+    placeholder="password"
+    [(ngModel)]="password"
+    name="password">
+  <button type="submit">Login in</button>
+</form>
+
+<p>Error: {{messageError}}</p>
+<p>result: {{result}}</p>
