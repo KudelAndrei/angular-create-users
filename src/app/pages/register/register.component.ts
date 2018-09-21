@@ -2,21 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../users.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   email = '';
   password = '';
   messageError = '';
   result = '';
-  constructor(private userService: UsersService) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit() { }
 
-  onSignIn(){
-    this.userService.signin(this.email, this.password).subscribe(res => {
+  onSignUp(){
+    this.usersService.signup(this.email, this.password).subscribe(res => {
       this.result = 'ok';
       this.messageError = '';
     }, 

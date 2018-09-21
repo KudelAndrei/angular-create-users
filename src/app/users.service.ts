@@ -7,18 +7,41 @@ import { Observable, of, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  ulr = 'http://localhost:3000/api';
+  url = 'http://localhost:3000/api';
   constructor(private http: Http) { }
 
   getUsers(){
-    return this.http.get(`${this.ulr}/users`)
+    return this.http.get(`${this.url}/users`)
       .pipe(map(res => res.json()))
       .pipe(map(res => res.users));
   }
 
-  loginIn(email, password){
-    return this.http.post(`${this.ulr}/users`, {email, password})
+  signin(email, password){
+    return this.http.post(`${this.url}/users`, {email, password})
       .pipe(map(res => res.json()),
+      catchError(err => {
+        return throwError(err);
+      }))
+  }
+
+  signup(email, password){
+    return this.http.post(`${this.url}/users`, {email, password})
+      .pipe(map(res => res.json()),
+      catchError(err => {
+        return throwError(err);
+      }))
+  }
+
+  changeStatus({email, password, status}){
+    let method = '';
+    if (+status === 1){
+      method = 'delete';
+    } else {
+      method = 'confirm';
+    }
+    return this.http.post(`${this.url}/users/${method}`, {email, password})
+      .pipe(map(res => res.json()))
+      .pipe(map(res => res.user), 
       catchError(err => {
         return throwError(err);
       }))

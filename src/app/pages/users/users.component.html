@@ -1,5 +1,7 @@
 <ul>
   <li *ngFor="let user of users">
     <span>email: {{user.email}}</span>
+    <p>status: {{user.status}}</p>
+    <button (click)="onChangeStatus(user)">{{user.status != 1 ? 'Подтвердить' : 'Удалить'}}</button>
   </li>
 </ul>

@@ -14,10 +14,16 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers().subscribe(res => {
       this.users = res;
-      console.log(this.users);
     }, 
     err => {
       this.err = err;
+    })
+  }
+
+  onChangeStatus(user){
+    this.userService.changeStatus(user).subscribe(res => {
+      const index = this.users.findIndex(element => element.id === user.id);
+      this.users[index] = res;
     })
   }
 
